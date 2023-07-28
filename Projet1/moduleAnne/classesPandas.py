@@ -19,21 +19,48 @@ def export_json_games(games):
 
     #Convertir le fichier en dataframe
     games_df = pandas.read_json(games)
-
-    print(games_df)
-
+    #print(games_df)
     #Créer un dictionnaire
     games_dict = {}
 
-  #Faire une boucle qui parcoure le df de games
+    #Créer une valeur key pour notre dictionnaire
+    key = 0
+
+    #Créer une valeur liste pour notre dictionnaire
+    new_value=[]
+
+     #Faire une boucle qui parcoure le df de games
     for column, rows in games_df.items():
-        print(type(rows))
-        print(type(column))
-        for row in rows:
+        
+        #print(type(rows))
+        #print(type(column))
+        #Itérer à travers le json au format dataframe
+        for index, row in rows.items():
             if row == None or isinstance(row,str) or isinstance (row, bool):
                 continue
-            for data in rows :
-                pprint(data['international'])
+            #Afficher le tableau avec un tri plus clair
+            #pprint(f"{key} : {row}")
+
+            #Trouver le nom du jeu vidéo et le mettre dans une variable
+            if index == "names":
+                for k, r in row.items():
+                    if k == "international":
+                        game_name = r
+
+            #Trouver sa date de sortie et la mettre dans une variable
+            if index == "released":
+                release_date = row
+            #Itérer la valeur key
+                key = key + 1
+                #Concaténer nos deux valeurs en une variable                 
+                new_value = [game_name, release_date]
+                #Mettre ces données dans le dictionnaire des catégories
+                games_dict.update({str(key):new_value})
+        pprint(games_dict)
+
+            #for data in rows :
+               #print()
+               # print(data)
 
 
 def export_json_categories(categories):
