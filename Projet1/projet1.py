@@ -8,8 +8,8 @@ from Module_Cédric import *
 
 def main():
 
-    ui = BasicUserInterface()
-    ui.start()
+#    ui = BasicUserInterface()
+#    ui.start()
     # Il faut que la liste des catégorie soit retournées sous le format
 #    {
 #        "1": ["id", "name"],
@@ -29,10 +29,10 @@ def main():
     
     json_leaderboard = game_category.get_leaderboard() 
 
-    print(ui.get_choice("game"))
-    print(ui.get_choice("category"))
+#    print(ui.get_choice("game"))
+#    print(ui.get_choice("category"))
 
-    print(ui.get_choices())
+#    print(ui.get_choices())
 
 if __name__ == "__main__":
     main()
