@@ -11,6 +11,28 @@ dir_path = pathlib.Path(__file__).parent
 games =  os.path.join(dir_path, "games.json")
 categories =  os.path.join(dir_path, "categories.json")
 leaderboard =  os.path.join(dir_path, "leaderboard.json")
+pseudo = os.path.join(dir_path, "pseudo.json")
+
+def export_pseudo(pseudo):
+
+    pseudo_df = pandas.read_json(pseudo)
+
+    for column, rows in pseudo_df.items():
+        #print(type(rows))
+        #print(type(column))
+        for index, row in rows.items():
+            if row == None or isinstance(row,str) or isinstance (row, bool):                    
+                continue
+            if index == 'names' :
+                for k, r in row.items():
+                    if k == "international":
+                        username = r
+                print(username)
+                
+
+
+
+
 
 
 def export_json_games(games):
@@ -161,6 +183,7 @@ def export_json_leaderboard(leaderboard):
                     
 
   
-export_json_games(games)
+#export_json_games(games)
 #export_json_categories(categories)
 #export_json_leaderboard(leaderboard)
+export_pseudo(pseudo)
