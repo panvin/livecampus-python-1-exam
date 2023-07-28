@@ -4,7 +4,7 @@
 #########################################################################################
 
 from ModuleVincent.basic_user_interface import BasicUserInterface
-from Module_Cédric import * 
+from ModuleCedric.Module_Cédric import * 
 
 def main():
 
