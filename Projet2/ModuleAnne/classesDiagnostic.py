@@ -2,6 +2,7 @@ import os
 import platform
 import psutil
 from pprint import pprint
+import datetime
 
 """
 # Modèle de donnée pour Anne
@@ -86,11 +87,14 @@ def diagnostic():
         #A CONVERTIR EN GO POUR PLUS DE LISIBILITE
 
     #-----------------NOM DES INTERFACES RESEAUX-----------------
-
+    interfaces_total = psutil.net_if_addrs()
+    for data in interfaces_total:
+        interfaces = data
 
 
     #-----------------BOOT TIME AU FORMAT HEURES:MINUTES:SECONDES-----------------
-
+    boot_time = psutil.boot_time()
+    formated_boot_time = datetime.datetime.fromtimestamp(boot_time).strftime("%H:%M:%S")
 
 
 
