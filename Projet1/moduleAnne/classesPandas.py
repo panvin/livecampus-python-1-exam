@@ -13,14 +13,16 @@ leaderboard =  os.path.join(dir_path, "leaderboard.json")
 pseudo = os.path.join(dir_path, "pseudo.json")
 
 def export_pseudo(pseudo):
-
+    #Convertir le fichier en dataframe
     pseudo_df = pandas.read_json(pseudo)
 
+    #Parcourir le fichier
     for column, rows in pseudo_df.items():
 
         for index, row in rows.items():
             if row == None or isinstance(row,str) or isinstance (row, bool):                    
                 continue
+            #Trouver le nom de l'user et le mettre dans une variable
             if index == 'names' :
                 for k, r in row.items():
                     if k == "international":
@@ -56,8 +58,6 @@ def export_json_games(games):
         for index, row in rows.items():
             if row == None or isinstance(row,str) or isinstance (row, bool):
                 continue
-            #Afficher le tableau avec un tri plus clair
-            #pprint(f"{key} : {row}")
 
             #Trouver le nom du jeu vidéo et le mettre dans une variable
             if index == "names":
@@ -98,7 +98,7 @@ def export_json_categories(categories):
             for row in rows:
                 if row == None or isinstance(row,str) or isinstance (row, bool):
                     continue
-                #pprint(row)
+                
                 #Chercher le nom et l'id des catégories
                 category_name = (row['name'])
                 category_id = (row['id'])
@@ -137,7 +137,7 @@ def export_json_leaderboard(leaderboard):
                 if not "run" in data:
                     continue
             
-                #pprint(data)
+                
                 #Affiche les id de chaque joueur
                 leaderboard_id = (data['run']['players'][0]['id'])
                 #Affiche le positionnement de chaque joueur
