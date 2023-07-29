@@ -11,7 +11,7 @@ class Runner():
         url = "https://www.speedrun.com/api/v1/users/"
         response_API = requests.get(f'{url}{self.nickname}')
         response_API.raise_for_status()
-        return response_API.json()
+        return response_API.text
         
         
 class SearchGame():
@@ -26,7 +26,7 @@ class SearchGame():
         response_API = requests.get(f'{url}{self.gamename}')
         response_API.raise_for_status()
         
-        return response_API.json()  
+        return response_API.text 
         
 class SearchCategory():
     
@@ -42,7 +42,7 @@ class SearchCategory():
         categories_API = requests.get(url_categories)
         categories_API.raise_for_status()
         
-        return categories_API.json()
+        return categories_API.text
             
     def get_leaderboard(self):
         
@@ -51,13 +51,13 @@ class SearchCategory():
             leaderboard_API = requests.get(url_leaderboard)
             leaderboard_API.raise_for_status()
             
-            return leaderboard_API.json()
+            return leaderboard_API.text
         
     def set_category(self, chosen_category):
         
         self.selected_category = chosen_category
         
-print(Runner("CeDiBuG").get_runner())
+#print(Runner("CeDiBuG").get_runner())
 
 #print(SearchGame("re4steam").get_game())     
           
