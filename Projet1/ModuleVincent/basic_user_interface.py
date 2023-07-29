@@ -8,19 +8,7 @@ class BasicUserInterface:
             "1": ["j1nem5x1", "RE 4 (steam)"],
             "2": ["n268nk6p", "Half-life"]
         }
-        self.categories_dict = {
-            "1" : ["824r4wgd", "New Game"],
-            "2" : ["9d8g9r3k", "New Game+"],
-            "3" : ["xd17p04d", "Separate Ways"],
-            "4" : ["zd37egv2", "Separate Ways+"],
-            "5" : [ "9kvyz08k", "Assignment Ada"],
-            "6" : ["rkljypnd", "No Merchant"],
-            "7" : ["n2ym0q72", "Wesker"],
-            "8" : ["wk645pod", "Hunk"],
-            "9" : ["mke70oj2", "Ada"],
-            "10": ["5dwxlj52", "Krauser"],
-            "11": ["7dg7o8gd", "Leon"]
-        }
+        self.categories_dict = {}
         self. msg_dict = {
             "welcome" : "Bienvenue sur l'outil de sélection de Leaderboard!!",
             "game": "Choisissez votre jeu (\"exit\" pour quitter): ", 
@@ -34,9 +22,16 @@ class BasicUserInterface:
         self.print_msg("welcome")        
         self.print_choice("game", self.allowed_games)
 
-    def choose_category(self, categories_dict = "") -> None:
-        #self.categories = categories_dict
-        self.print_choice("category", self.categories_dict)
+    def choose_category(self, categories_dict = {}) -> None:
+        if categories_dict:
+            self.categories_dict = categories_dict
+        if  self.categories_dict:
+            self.print_choice("category", self.categories_dict)
+        else:
+            print("Une erreur s'est produit, il n'y a pas de catégorie associé à ce jeu")
+    
+    def set_categories(self, categories_dict: dict[str, list]) -> None:
+        self.categories_dict = categories_dict
 
     def choose_max_leaderboard(self):
         self.print_choice("second_choice", self.categories_dict)
@@ -72,4 +67,3 @@ class BasicUserInterface:
     
     def get_choice(self, choice_id) -> str:
         return self.choice_dict[choice_id]
-
