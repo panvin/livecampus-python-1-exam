@@ -6,7 +6,7 @@ import datetime
 #Cette classe extraie des données spécifiques d'informations systèmes et les retourne sous forme de dictionnaire
 class Diagnostic:
 
-    def create_diagnostic():
+    def create_diagnostic(self):
         #-----------------RECUPERER LE NOM DE L'OS-----------------
         #Stocker les infos sur l'os dans une variable
         os_infos = platform.uname()
