@@ -7,7 +7,6 @@ import json
 
 
 dir_path = pathlib.Path(__file__).parent
-#file_arg = str(sys.argv[1])
 games =  os.path.join(dir_path, "games.json")
 categories =  os.path.join(dir_path, "categories.json")
 leaderboard =  os.path.join(dir_path, "leaderboard.json")
@@ -18,8 +17,7 @@ def export_pseudo(pseudo):
     pseudo_df = pandas.read_json(pseudo)
 
     for column, rows in pseudo_df.items():
-        #print(type(rows))
-        #print(type(column))
+
         for index, row in rows.items():
             if row == None or isinstance(row,str) or isinstance (row, bool):                    
                 continue
@@ -27,7 +25,7 @@ def export_pseudo(pseudo):
                 for k, r in row.items():
                     if k == "international":
                         username = r
-                print(username)
+                return username
                 
 
 
@@ -41,7 +39,6 @@ def export_json_games(games):
 
     #Convertir le fichier en dataframe
     games_df = pandas.read_json(games)
-    #print(games_df)
     #Créer un dictionnaire
     games_dict = {}
 
@@ -54,8 +51,7 @@ def export_json_games(games):
      #Faire une boucle qui parcoure le df de games
     for column, rows in games_df.items():
         
-        #print(type(rows))
-        #print(type(column))
+
         #Itérer à travers le json au format dataframe
         for index, row in rows.items():
             if row == None or isinstance(row,str) or isinstance (row, bool):
@@ -78,11 +74,8 @@ def export_json_games(games):
                 new_value = [game_name, release_date]
                 #Mettre ces données dans le dictionnaire des catégories
                 games_dict.update({str(key):new_value})
-        pprint(games_dict)
+        return games_dict
 
-            #for data in rows :
-               #print()
-               # print(data)
 
 
 def export_json_categories(categories):
@@ -115,21 +108,9 @@ def export_json_categories(categories):
                 new_value = [category_id, category_name]
                 #Mettre ces données dans le dictionnaire des catégories
                 categories_dict.update({str(key):new_value})
+    return categories_dict
 
-    pprint(categories_dict)
-                #for data in row : 
-                #    if not "run" in data:
-                #        continue
-                
-                    #if data['place'] <= nombre_joueurs:
-                    #print(data['place'])
-                
-
-                    #Affiche les id de chaque joueur
-                    #pprint (data['run']['players'][0]['id'])
-                    #Affiche le positionnement de chaque joueur
-                    #pprint (data ['place'])
-
+    
 
 def export_json_leaderboard(leaderboard):
         
@@ -147,8 +128,7 @@ def export_json_leaderboard(leaderboard):
 
     #Faire une boucle qui parcoure l'API
     for column, rows in leaderboard_df.items():
-        print(type(rows))
-        print(type(column))
+    
         for row in rows:
             if row == None or isinstance(row,str) or isinstance (row, bool):                    
                 continue
@@ -169,15 +149,7 @@ def export_json_leaderboard(leaderboard):
                 #Mettre ces données dans le dictionnaire des catégories
                 leaderboard_dict.update({str(key):new_value})
 
-    pprint(leaderboard_dict)
-           # pprint (row['place'])
-
-            #for data in row : 
-             #   if not "run" in data:
-              #      continue
-               # pprint(data)
-                    #if data['place'] <= nombre_joueurs:
-                    #print(data['place'])
+    return leaderboard_dict
                 
 
                     
@@ -186,4 +158,4 @@ def export_json_leaderboard(leaderboard):
 #export_json_games(games)
 #export_json_categories(categories)
 #export_json_leaderboard(leaderboard)
-export_pseudo(pseudo)
+#export_pseudo(pseudo)
