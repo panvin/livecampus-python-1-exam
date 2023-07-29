@@ -4,13 +4,14 @@ from operator import itemgetter
 
 class Error_Report():
 
-    def export_json():
+    def Extract_error():
     
-        content = pandas.read_json("H:\LiveCampus\python\Exercice\Python exam\livecampus-python-1-exam\Projet2\ett.json")
+        
+        content = ""
 
-        test = (content['hits']['hits'])
+        rows = (content['hits']['hits'])
         liste_pleine = []
-        for line in test:
+        for line in rows:
             if line['_source']['log']['level'] == "error" or line['_source']['log']['level'] == "warning":
                 list_vide = [line['_source']['host']['name'], line['_source']['log']['level'], line['_source']['message']]
                 if list_vide :
