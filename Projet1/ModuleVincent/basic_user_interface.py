@@ -3,17 +3,17 @@ import sys
 class BasicUserInterface:
 
     def __init__(self):
-        self.max_leaderboard = 10
+        self.max_leaderboard = 30
         self.allowed_games= {
             "1": ["j1nem5x1", "RE 4 (steam)"],
-            "2": ["n268nk6p", "Half-life"]
+            "2": ["76rkwed8", "Nier Automata"]
         }
         self.categories_dict = {}
         self. msg_dict = {
             "welcome" : "Bienvenue sur l'outil de sélection de Leaderboard!!",
             "game": "Choisissez votre jeu (\"exit\" pour quitter): ", 
             "category": "Choisissez la catégorie  (\"exit\" pour quitter):",
-            "third_choice": f"Choisissez le nombre de lignes dans le leaderboard  (max {self.max_leaderboard} - \"exit\" pour quitter): "
+            "maximum": f"Choisissez le nombre de lignes dans le leaderboard  (max {self.max_leaderboard} - \"exit\" pour quitter): "
         }
         self. choice_dict = {}
 
@@ -30,17 +30,17 @@ class BasicUserInterface:
         else:
             print("Une erreur s'est produit, il n'y a pas de catégorie associé à ce jeu")
     
-    def set_categories(self, categories_dict: dict[str, list]) -> None:
-        self.categories_dict = categories_dict
+    
+    def choose_maximum(self):
+        self.print_msg("maximum")
+        print(f"(1 - {self.max_leaderboard})")
+        self.ask_for_choice_max()
 
-    def choose_max_leaderboard(self):
-        self.print_choice("second_choice", self.categories_dict)
 
-
-    def print_choice(self, choice_key: str, choice_dict: dict ):
-        self.print_msg(choice_key)
+    def print_choice(self, element: str, choice_dict: dict ):
+        self.print_msg(element)
         self.print_item_choice(choice_dict)
-        self.ask_for_choice(choice_key, choice_dict)
+        self.ask_for_choice(element, choice_dict)
 
     def print_item_choice(self, choice_dict: dict):
         for key, value  in choice_dict.items():
@@ -62,6 +62,24 @@ class BasicUserInterface:
             else:
                 print("La valeur entrée est incorrecte")
 
+    def ask_for_choice_max(self):
+        is_choice_correct = False
+        while not is_choice_correct :
+            choice = input()
+            choice_as_number = int(choice)
+            if 1 <= choice_as_number <= self.max_leaderboard:
+                self.choice_dict["maximum"] = choice_as_number
+                is_choice_correct = True
+            elif "exit" == choice :
+                print("Arrêt de l'éxécution du script!")
+                sys.exit()
+            else:
+                print("La valeur entrée est incorrecte")
+
+
+    def set_categories(self, categories_dict: dict[str, list]) -> None:
+        self.categories_dict = categories_dict
+    
     def get_choices(self) -> dict:
         return self.choice_dict
     

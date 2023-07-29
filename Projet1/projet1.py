@@ -7,6 +7,7 @@ from ModuleVincent.basic_user_interface import BasicUserInterface
 from ModuleCedric.Module_Cédric import * 
 from moduleAnne.classesPandas import JsonToDictionnary
 from pprint import pprint
+import time
 
 def main():
 
@@ -17,7 +18,7 @@ def main():
         "Game": "",
         "Release date": "",
         "Category": "",
-        "Leaderboard": [["Position", "Player", "Time"]]
+        "Leaderboard": [["Position", "Player", "Realgit add Time"]]
     }
 
     ui.start()
@@ -31,33 +32,31 @@ def main():
     game_categories = SearchCategory(ui.get_choice("game"))
     catogories_dict = json_tool.export_json_categories(game_categories.get_category())
     ui.set_categories(catogories_dict)
-
+    
     ui.choose_category()
 
-    print(ui.get_choice("category"))
+    for key,values in catogories_dict.items():
+        if ui.get_choice("category") in values:
+            data["Category"] = values [1]
+
     game_categories.set_category(ui.get_choice("category"))
     json_leaderboard = game_categories.get_leaderboard()
 
     leaderboard_dict = json_tool.export_json_leaderboard(json_leaderboard)
 
-    pprint(leaderboard_dict)
-
-
-
-#    ui.choose_category(dict)    
+    # Choix du maximum de lignes
+    ui.choose_maximum()
+    leaderboard_with_pseudo = []
     
+    for i in range(1, ui.get_choice("maximum") + 1):
+        player_id = leaderboard_dict[str(i)][0]
+        pseudo = json_tool.export_pseudo(Runner(player_id).get_runner())
+        player_time = leaderboard_dict[str(i)][1]
+        leaderboard_with_pseudo.append([str(i),pseudo, player_time[2:]])
+        time.sleep(2)
     
-#    game_category = SearchCategory("j1nem5x1")
-#    json_category = game_category.get_category()
-
-#    game_category.set_category("824r4wgd")
-    
-#    json_leaderboard = game_category.get_leaderboard() 
-
-#    print(ui.get_choice("game"))
-#    print(ui.get_choice("category"))
-
-#    print(ui.get_choices())
+    data["Leaderboard"].append(leaderboard_with_pseudo)
+    pprint(data)
 
 if __name__ == "__main__":
     main()
