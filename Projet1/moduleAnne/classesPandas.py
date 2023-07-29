@@ -1,8 +1,5 @@
 import pandas 
 
-from pprint import pprint
-
-
 
 
 class JsonToDictionnary :
