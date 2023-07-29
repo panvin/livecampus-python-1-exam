@@ -65,7 +65,7 @@ class JsonToDictionnary :
             return games_dict
 
 
-    def export_json_categories(self,):
+    def export_json_categories(self, categories):
         
         categories = self.json
         #Convertir categories en dataframe
