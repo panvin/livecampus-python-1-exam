@@ -67,7 +67,7 @@ class JsonToDictionnary :
 
     def export_json_categories(self, categories):
         
-        categories = self.json
+        
         #Convertir categories en dataframe
         categories_df = pandas.read_json(categories)
 
@@ -134,12 +134,14 @@ class JsonToDictionnary :
                         guest_name = (data['run']['players'][0]['name'])
                         leaderboard_id = (f"guest = {guest_name}")
 
+                    #Temps du joueur /de la joueuse    
+                    leaderboard_realtime =(data['run']['times']['realtime'])
                     #Affiche le positionnement de chaque joueur
                     leaderboard_place = (data ['place'])
                     #Itérer la valeur key
                     key = key + 1
                     #Concaténer nos deux valeurs en une variable                 
-                    new_value = [leaderboard_id, leaderboard_place]
+                    new_value = [leaderboard_id, leaderboard_realtime, leaderboard_place]
                     #Mettre ces données dans le dictionnaire des catégories
                     leaderboard_dict.update({str(key):new_value})
 
