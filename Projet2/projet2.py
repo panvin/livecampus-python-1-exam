@@ -5,7 +5,7 @@
 
 from ModuleVincent.file_utils import FileUtils
 from ModuleCedric.log_report import Log_Report
-from ModuleAnne.classesDiagnostic import diagnostic
+from ModuleAnne.classesDiagnostic import Diagnostic
 from pprint import pprint
 import pathlib
 import os
@@ -33,10 +33,9 @@ def main():
                   "message"  : [i[2] for i in logs_list],
                  }
     
-    infos_dict= diagnostic()
+    infos_dict= Diagnostic().create_diagnostic()
     # Adaptation du format de données pour l'export xlsx, il faut qu'on ait le mêmem nombre de lignes dans chaques listes
     max_array = len(infos_dict["Les variables d'environnements"])
-    print(max_array)
     for key, rows in infos_dict.items():
         while len(rows)< max_array:
             rows.append("")
