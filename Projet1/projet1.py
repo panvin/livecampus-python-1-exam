@@ -18,7 +18,7 @@ def main():
         "Game": "",
         "Release date": "",
         "Category": "",
-        "Leaderboard": [["Position", "Player", "Realgit add Time"]]
+        "Leaderboard": [["Position", "Player", "RealTime"]]
     }
 
     ui.start()
