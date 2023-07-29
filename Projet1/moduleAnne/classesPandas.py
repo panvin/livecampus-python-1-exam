@@ -123,10 +123,17 @@ class JsonToDictionnary :
                 for data in row : 
                     if not "run" in data:
                         continue
-                
+                    #Variable qui contient le statut du joueur : guest ou user
+                    rel = (data['run']['players'][0]['rel'])
+                    #Si le.la joueur.se est un.e user, on cherche son id dans le dataframe
+                    if rel == "user":
+                        leaderboard_id = (data['run']['players'][0]['id'])
                     
-                    #Affiche les id de chaque joueur
-                    leaderboard_id = (data['run']['players'][0]['id'])
+                    #Si le.la joueur.se est un.e guest, on cherche son name dans le dataframe
+                    elif rel == "guest":
+                        guest_name = (data['run']['players'][0]['name'])
+                        leaderboard_id = (f"guest = {guest_name}")
+
                     #Affiche le positionnement de chaque joueur
                     leaderboard_place = (data ['place'])
                     #Itérer la valeur key
