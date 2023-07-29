@@ -1,5 +1,4 @@
 import pandas
-from pprint import pprint 
 from operator import itemgetter
 
 class Log_Report():
