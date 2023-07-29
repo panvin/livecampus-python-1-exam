@@ -2,14 +2,14 @@ import pandas
 from pprint import pprint 
 from operator import itemgetter
 
-class Error_Report():
+class Log_Report():
 
-    def Extract_error():
+    def extract_logs(path_json):
     
         
-        content = ""
+        Extract_Logs = pandas.read_json(path_json)
 
-        rows = (content['hits']['hits'])
+        rows = (Extract_Logs['hits']['hits'])
         liste_pleine = []
         for line in rows:
             if line['_source']['log']['level'] == "error" or line['_source']['log']['level'] == "warning":
