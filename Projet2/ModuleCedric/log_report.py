@@ -4,7 +4,7 @@ from operator import itemgetter
 
 class Log_Report():
 
-    def extract_logs(path_json):
+    def extract_logs(self, path_json):
     
         
         Extract_Logs = pandas.read_json(path_json)
