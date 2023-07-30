@@ -63,8 +63,8 @@ def main():
             pseudo = player_id[8:]
         else:
             pseudo = json_tool.export_pseudo(Runner(player_id).get_runner())
-        player_time = leaderboard_dict[str(i)][1]
-        leaderboard_with_pseudo.append([str(i),pseudo, player_time[2:]])
+        player_time = leaderboard_dict[str(i)][1][2:].replace("H", " h ").replace("M"," min ").replace("S", " sec ")
+        leaderboard_with_pseudo.append([str(i),pseudo, player_time])
         
         # Attente entre chaque requête pour éviter de surcharger le serveur 
         time.sleep(1)

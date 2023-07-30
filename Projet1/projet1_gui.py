@@ -202,8 +202,8 @@ class MainWindow(QMainWindow):
                 pseudo = self.jsonTool.export_pseudo(Runner(playerId).get_runner())
                 # Attente entre deux requêtes pour éviter de faire trop de requêtes au serveur
                 time.sleep(1)
-            player_time = leaderboardDict[str(i)][1]
-            self.leaderBoard.append([str(i),pseudo, player_time[2:]])
+            player_time = leaderboardDict[str(i)][1][2:].replace("H", " h ").replace("M"," min ").replace("S", " sec ")
+            self.leaderBoard.append([str(i),pseudo, player_time])
         
 
     def showLeaderboard(self):
