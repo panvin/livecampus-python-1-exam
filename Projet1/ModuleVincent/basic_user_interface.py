@@ -2,12 +2,9 @@ import sys
 
 class BasicUserInterface:
 
-    def __init__(self):
+    def __init__(self, games):
         self.max_leaderboard = 30
-        self.allowed_games= {
-            "1": ["j1nem5x1", "RE 4 (steam)"],
-            "2": ["76rkwed8", "Nier Automata"]
-        }
+        self.allowed_games= games
         self.categories_dict = {}
         self. msg_dict = {
             "welcome" : "Bienvenue sur l'outil de sélection de Leaderboard!!",
@@ -66,7 +63,11 @@ class BasicUserInterface:
         is_choice_correct = False
         while not is_choice_correct :
             choice = input()
-            choice_as_number = int(choice)
+            try:
+                choice_as_number = int(choice)
+            except ValueError:
+                print("La valeur entrée est incorrecte")
+                continue
             if 1 <= choice_as_number <= self.max_leaderboard:
                 self.choice_dict["maximum"] = choice_as_number
                 is_choice_correct = True
