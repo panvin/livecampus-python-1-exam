@@ -268,7 +268,7 @@ class MainWindow(QMainWindow):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    app.setStyleSheet(Path('H:\LiveCampus\python\Exercice\Python exam\livecampus-python-1-exam\Projet1\login.qss').read_text())
+    app.setStyleSheet(Path('.\stylesheet.qss').read_text())
     window = MainWindow()
     window.show()
 
