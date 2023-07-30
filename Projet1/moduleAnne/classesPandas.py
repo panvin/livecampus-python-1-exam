@@ -86,9 +86,13 @@ class JsonToDictionnary :
                     if row == None or isinstance(row,str) or isinstance (row, bool):
                         continue
                     
-                    #Chercher le nom et l'id des catégories
-                    category_name = (row['name'])
-                    category_id = (row['id'])
+                #Chercher le nom et l'id des catégories sauf si le type est "per-game"
+                    if (row['type']) =="per-game":
+                        continue
+                    else:
+                        category_name = (row['name'])
+                        category_id = (row['id'])
+
                     #Itérer la valeur key
                     key = key + 1
                     #Concaténer nos deux valeurs en une variable                 
