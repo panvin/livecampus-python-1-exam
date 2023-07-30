@@ -126,7 +126,6 @@ class MainWindow(QMainWindow):
                 self.resetCategoriesComboBox()
                 self.resetLeaderboard()
                 self.updateCategories()
-                self.Ui_GameImage()
         
         # Dans le cas où l'élément sélectionné est le placeholder
         else:
@@ -257,10 +256,7 @@ class MainWindow(QMainWindow):
                     self.ui.leaderboard.item(row, column).setBackground(QColor(224,224,224))
                 else:
                     self.ui.leaderboard.setItem(row, column, QTableWidgetItem(""))
-                    
-    def Ui_GameImage(self):
-        if self.selectedGame == "Nier Automata":
-            app.setStyleSheet(Path('H:\LiveCampus\python\Exercice\Python exam\livecampus-python-1-exam\Projet1\\Nier.qss').read_text())
+                
         
         
         
