@@ -3,6 +3,8 @@
 #               Anne Cadeillan  -  Cédric Artaud  -  Vincent PANOUILLERES               #
 #########################################################################################
 
+# Projet Github: https://github.com/panvin/livecampus-python-1-exam
+
 from ModuleVincent.file_utils import FileUtils
 from ModuleCedric.log_report import Log_Report
 from ModuleAnne.classesDiagnostic import Diagnostic
@@ -34,12 +36,14 @@ def main():
                  }
     
     infos_dict= Diagnostic().create_diagnostic()
-    # Adaptation du format de données pour l'export xlsx, il faut qu'on ait le mêmem nombre de lignes dans chaques listes
+
+    # Adaptation du format de données pour l'export xlsx, il faut qu'on ait le même nombre de lignes dans chaques listes
     max_array = len(infos_dict["Les variables d'environnements"])
     for key, rows in infos_dict.items():
         while len(rows)< max_array:
             rows.append("")
  
+    # Export des données
     file_utils.export_as_xlsx(xlsx_path, logs_dict, infos_dict)
 
 if __name__ == "__main__":

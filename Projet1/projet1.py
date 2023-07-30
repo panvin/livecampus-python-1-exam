@@ -3,6 +3,8 @@
 #               Anne Cadeillan  -  Cédric Artaud  -  Vincent PANOUILLERES               #
 #########################################################################################
 
+# Projet Github: https://github.com/panvin/livecampus-python-1-exam
+
 from ModuleVincent.basic_user_interface import BasicUserInterface
 from ModuleCedric.Module_Cédric import * 
 from moduleAnne.classesPandas import JsonToDictionnary
@@ -49,10 +51,12 @@ def main():
     ui.choose_maximum()
     leaderboard_with_pseudo = []
 
+    # Récupération de la valeur max en input et on la remplace si elle est supérieure au nombre de données présentes
     max_range = ui.get_choice("maximum")
     if len(leaderboard_dict) < max_range:
         max_range = len(leaderboard_dict)
     
+    # Création de notre lot de donnée du leaderboard
     for i in range(1, max_range + 1):
         player_id = leaderboard_dict[str(i)][0]
         if "guest =" in player_id:
@@ -61,7 +65,9 @@ def main():
             pseudo = json_tool.export_pseudo(Runner(player_id).get_runner())
         player_time = leaderboard_dict[str(i)][1]
         leaderboard_with_pseudo.append([str(i),pseudo, player_time[2:]])
-        time.sleep(2)
+        
+        # Attente entre chaque requête pour éviter de surcharger le serveur 
+        time.sleep(1)
     
     data["Leaderboard"].append(leaderboard_with_pseudo)
     pprint(data)

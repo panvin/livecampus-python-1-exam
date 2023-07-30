@@ -1,3 +1,11 @@
+#########################################################################################
+#                      Projet 1 Examen Semaine Python Livecampus                        #
+#               Anne Cadeillan  -  Cédric Artaud  -  Vincent PANOUILLERES               #
+#########################################################################################
+
+# Bonus: utilisation d'une GUI avec PyQt6
+# Projet Github: https://github.com/panvin/livecampus-python-1-exam
+
 import sys
 from PyQt6 import QtCore, QtWidgets
 from PyQt6.QtGui import QColor
@@ -8,6 +16,7 @@ import time
 
 
 class Ui_MainWindow(object):
+    
     def setupUi(self, MainWindow, gamesList, categoriesList):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 600)
@@ -92,14 +101,17 @@ class MainWindow(QMainWindow):
         self.ui.setupUi(self, list(self.gamesDict.values()) , list(self.categoriesDict.values()))
         self.resetLeaderboard()
         
-        # Déclaration des triggers des élémpents visuels
+        # Déclaration des triggers des éléments visuels
         self.ui.gamesComboBox.activated.connect(self.selectGame)
         self.ui.categoriesComboBox.activated.connect(self.selectCategory)
         self.ui.validButton.pressed.connect(self.valid)
 
     def selectGame(self):
+        # Dans le cas où l'élément sélectionné n'est pas le placeholder
         if self.ui.gamesComboBox.currentIndex() > 0 :
             selected = list(self.gamesDict)[self.ui.gamesComboBox.currentIndex()]
+            
+            # Si l'élément sélectionné est différent de celui déjà sélectionné met à jour les données et on reset les élements visuels
             if self.selectedGame != selected:
                 self.selectedGame = selected 
                 self.ui.categoriesComboBox.setEnabled(True)
@@ -107,41 +119,55 @@ class MainWindow(QMainWindow):
                 self.resetCategoriesComboBox()
                 self.resetLeaderboard()
                 self.updateCategories()
+        
+        # Dans le cas où l'élément sélectionné est le placeholder
         else:
             self.resetAndDisableCategoriesComboBox()
             self.selectedGame = ""
             self.ui.validButton.setEnabled(False)
             self.resetLeaderboard()
 
+    def selectCategory(self):
+        # Dans le cas où l'élément sélectionné n'est pas le placeholder
+        if self.ui.categoriesComboBox.currentIndex() > 0 :
+            selected = list(self.categoriesDict)[self.ui.categoriesComboBox.currentIndex()]
+            
+            # Si l'élément sélectionné est différent de celui déjà sélectionné met à jour les données et on reset les élements visuels
+            if self.selectedCategory != selected:
+                self.selectedCategory = selected
+                self.ui.validButton.setEnabled(True)
+                self.resetLeaderboard()
+        # Dans le cas où l'élément sélectionné n'est pas le placeholder
+        else:
+            self.selectedCategory = ""
+            self.ui.validButton.setEnabled(False)
+            self.resetLeaderboard()
+
     def updateCategories(self):
         
+        # Si la catégorie est en cache on ne refait pas de requête
         if self.selectedGame in self.cachedGameData:
             game_json = self.cachedGameData[self.selectedGame]
+        
+        # Appel de l'api pour récupérer la liste des catégories
         else:
             game_categories = SearchCategory(self.selectedGame)
             game_json = game_categories.get_category()
             self.cachedGameData[self.selectedGame] = game_json
 
         catogories_dict = self.jsonTool.export_json_categories(game_json)
+        
+        # Stockage dans les données de l'objet et mis à jour de l'affichage
         for key, value in catogories_dict.items():
             self.categoriesDict[value[0]] = value[1]
         self.populateCategoriesComboBox()
 
-    def selectCategory(self):
-        if self.ui.categoriesComboBox.currentIndex() > 0 :
-            selected = list(self.categoriesDict)[self.ui.categoriesComboBox.currentIndex()]
-            if self.selectedCategory != selected:
-                self.selectedCategory = selected
-                self.ui.validButton.setEnabled(True)
-                self.resetLeaderboard()
-        else:
-            self.selectedCategory = ""
-            self.ui.validButton.setEnabled(False)
-            self.resetLeaderboard()
-
     def valid(self):
+        # Si le leaderborad est en cache on ne refait pas de requête
         if self.selectedGame in self.cachedLeaderboardData:
             leadeboard_json = self.cachedLeaderboardData[f"{self.selectedGame}{self.selectedCategory}"]
+        
+        # Appel de l'api pour récupérer le leaderboard
         else:
             game_categories = SearchCategory(self.selectedGame)
             game_categories.set_category(self.selectedCategory)
@@ -149,8 +175,9 @@ class MainWindow(QMainWindow):
             self.cachedLeaderboardData[f"{self.selectedGame}{self.selectedCategory}"] = leadeboard_json
 
         leaderboardDict = self.jsonTool.export_json_leaderboard(leadeboard_json)
+        
+        # Traitement et stockage dans les données de l'objet puis mis à jour de l'affichage
         self.formatLeaderboardWithPseudo(leaderboardDict)
-
         self.showLeaderboard()
 
     def formatLeaderboardWithPseudo(self, leaderboardDict):
@@ -162,12 +189,18 @@ class MainWindow(QMainWindow):
     
         for i in range(1,  max_range + 1):
             playerId = leaderboardDict[str(i)][0]
+            # Si le player est un guest on récupère juste son pseudo
             if "guest =" in playerId:
                 pseudo = playerId[8:]
+
+            # Si le player est en cache on ne refait pas de requête
             elif playerId in self.cachedRunners:
                 pseudo = self.cachedRunners[playerId]
+            
+            # Appel de l'api pour récupérer le player
             else:
                 pseudo = self.jsonTool.export_pseudo(Runner(playerId).get_runner())
+                # Attente entre deux requêtes pour éviter de faire trop de requêtes au serveur
                 time.sleep(1)
             player_time = leaderboardDict[str(i)][1]
             self.leaderBoard.append([str(i),pseudo, player_time[2:]])
