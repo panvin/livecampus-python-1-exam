@@ -1,0 +1,39 @@
+QWidget#MainWindow {
+  background-image: url("..\images\main_menu.png");
+}
+QLabel {
+  color: #464d55;
+  font-weight: 600;
+}
+QLineEdit {
+  border-radius: 8px;
+  border: 1px solid #e0e4e7;
+  padding: 5px 15px;
+}
+
+
+
+QPushButton{
+  background-color: #ffffff;
+  color: #000000;
+  font-weight: 600;
+  border-radius: 8px;
+  border: 1px solid #0d6efd;
+  padding: 5px 15px;
+  margin-top: 10px;
+  outline: 0px;
+}
+QPushButton:hover{
+    background-color: #0b5ed7;
+    color: #000000;
+    font-weight: 600;
+    border-radius: 8px;
+    border: 1px solid #0d6efd;
+    padding: 5px 15px;
+    margin-top: 10px;
+    outline: 0px;
+}
+QPushButton:focus {
+  background-color: #0b5ed7;
+  border: 3px solid #9ac3fe;
+}
