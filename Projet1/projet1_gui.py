@@ -266,8 +266,12 @@ class MainWindow(QMainWindow):
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     rootFile = Path(__file__).parent.resolve()
-    path_stylesheet = os.path.join(rootFile, "stylesheets.qss")
-    app.setStyleSheet(path_stylesheet)
+    os.chdir(rootFile)
+    path_stylesheet = os.path.join(rootFile, "stylesheet.qss")
+    with open(path_stylesheet, 'r') as f:
+        style = f.read()
+    # Set the stylesheet of the application
+    app.setStyleSheet(style)
     window = MainWindow()
     window.show()
 

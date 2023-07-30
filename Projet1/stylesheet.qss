@@ -1,5 +1,5 @@
 QWidget#MainWindow {
-  background-image: url("..\images\main_menu.png");
+  background-image: url("images/main_menu.png");
 }
 QLabel {
   color: #464d55;
