@@ -13,7 +13,17 @@ import time
 
 def main():
 
-    ui = BasicUserInterface()
+    games = {
+            "1": ["n268nk6p",  "Half-Life 1"],
+            "2": ["yo1yyr1q",  "Mirror's edge"],
+            "3": ["m1mgl312",  "Mirror's edge Catalyst"],
+            "4": ["9d3rq4wd",  "Monster Hunter World"],
+            "5": ["76rkwed8",  "Nier Automata"],
+            "6": ["j1nem5x1",  "RE 4 (steam)"],
+            "7": ["o1y9wo6q",  "Super Mario 64"]
+        }
+    
+    ui = BasicUserInterface(games)
     json_tool = JsonToDictionnary()
 
     data = {
@@ -45,7 +55,6 @@ def main():
     json_leaderboard = game_categories.get_leaderboard()
 
     leaderboard_dict = json_tool.export_json_leaderboard(json_leaderboard)
-    print(leaderboard_dict)
 
     # Choix du maximum de lignes
     ui.choose_maximum()
