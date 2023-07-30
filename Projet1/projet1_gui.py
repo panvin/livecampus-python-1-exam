@@ -89,7 +89,6 @@ class MainWindow(QMainWindow):
             "n268nk6p" : "Half-Life 1",
             "yo1yyr1q" : "Mirror's edge",
             "m1mgl312" : "Mirror's edge Catalyst",
-            "9d3rq4wd" : "Monster Hunter World",
             "76rkwed8" : "Nier Automata",
             "j1nem5x1": "RE 4 (steam)",
             "o1y9wo6q" : "Super Mario 64"

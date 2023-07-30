@@ -17,10 +17,9 @@ def main():
             "1": ["n268nk6p",  "Half-Life 1"],
             "2": ["yo1yyr1q",  "Mirror's edge"],
             "3": ["m1mgl312",  "Mirror's edge Catalyst"],
-            "4": ["9d3rq4wd",  "Monster Hunter World"],
-            "5": ["76rkwed8",  "Nier Automata"],
-            "6": ["j1nem5x1",  "RE 4 (steam)"],
-            "7": ["o1y9wo6q",  "Super Mario 64"]
+            "4": ["76rkwed8",  "Nier Automata"],
+            "5": ["j1nem5x1",  "RE 4 (steam)"],
+            "6": ["o1y9wo6q",  "Super Mario 64"]
         }
     
     ui = BasicUserInterface(games)
