@@ -43,6 +43,7 @@ def main():
     json_leaderboard = game_categories.get_leaderboard()
 
     leaderboard_dict = json_tool.export_json_leaderboard(json_leaderboard)
+    print(leaderboard_dict)
 
     # Choix du maximum de lignes
     ui.choose_maximum()
@@ -50,7 +51,10 @@ def main():
     
     for i in range(1, ui.get_choice("maximum") + 1):
         player_id = leaderboard_dict[str(i)][0]
-        pseudo = json_tool.export_pseudo(Runner(player_id).get_runner())
+        if "guest =" in player_id:
+            pseudo = player_id[8:]
+        else:
+            pseudo = json_tool.export_pseudo(Runner(player_id).get_runner())
         player_time = leaderboard_dict[str(i)][1]
         leaderboard_with_pseudo.append([str(i),pseudo, player_time[2:]])
         time.sleep(2)
