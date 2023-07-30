@@ -87,7 +87,7 @@ class JsonToDictionnary :
                         continue
                     
                 #Chercher le nom et l'id des catégories sauf si le type est "per-game"
-                    if (row['type']) =="per-game":
+                    if (row['type']) !="per-game":
                         continue
                     else:
                         category_name = (row['name'])
