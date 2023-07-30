@@ -8,10 +8,11 @@
 
 import sys
 from PyQt6 import QtCore, QtWidgets
-from PyQt6.QtGui import QColor
-from PyQt6.QtWidgets import QApplication, QMainWindow, QTableWidgetItem, QHeaderView
+from PyQt6.QtGui import QColor, QIcon, QImage, QPixmap
+from PyQt6.QtWidgets import QApplication, QMainWindow, QTableWidgetItem, QHeaderView, QLabel 
 from ModuleCedric.Module_Cédric import * 
 from moduleAnne.classesPandas import JsonToDictionnary
+from pathlib import Path
 import time
 
 
@@ -74,11 +75,12 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "API Tool request speedrun.com"))
         self.maxRowLabel.setText(_translate("MainWindow", "Runs"))
         self.validButton.setText(_translate("MainWindow", "Search"))
+        
 
 class MainWindow(QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
-        
+    
         # Déclaration des données de l'application
         self.jsonTool = JsonToDictionnary()
         self.gamesDict = {
@@ -124,6 +126,7 @@ class MainWindow(QMainWindow):
                 self.resetCategoriesComboBox()
                 self.resetLeaderboard()
                 self.updateCategories()
+                self.Ui_GameImage()
         
         # Dans le cas où l'élément sélectionné est le placeholder
         else:
@@ -254,11 +257,18 @@ class MainWindow(QMainWindow):
                     self.ui.leaderboard.item(row, column).setBackground(QColor(224,224,224))
                 else:
                     self.ui.leaderboard.setItem(row, column, QTableWidgetItem(""))
+                    
+    def Ui_GameImage(self):
+        if self.selectedGame == "Nier Automata":
+            app.setStyleSheet(Path('H:\LiveCampus\python\Exercice\Python exam\livecampus-python-1-exam\Projet1\\Nier.qss').read_text())
+        
+        
+        
 
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-
+    app.setStyleSheet(Path('H:\LiveCampus\python\Exercice\Python exam\livecampus-python-1-exam\Projet1\login.qss').read_text())
     window = MainWindow()
     window.show()
 
