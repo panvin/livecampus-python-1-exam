@@ -48,8 +48,12 @@ def main():
     # Choix du maximum de lignes
     ui.choose_maximum()
     leaderboard_with_pseudo = []
+
+    max_range = ui.get_choice("maximum")
+    if len(leaderboard_dict) < max_range:
+        max_range = len(leaderboard_dict)
     
-    for i in range(1, ui.get_choice("maximum") + 1):
+    for i in range(1, max_range + 1):
         player_id = leaderboard_dict[str(i)][0]
         if "guest =" in player_id:
             pseudo = player_id[8:]
