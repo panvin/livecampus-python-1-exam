@@ -32,12 +32,15 @@ class Ui_MainWindow(object):
         self.categoriesComboBox.setEnabled(False)
         
         # Definition Max Row Label and spinbox
-        self.labelMaxRow = QtWidgets.QLabel(parent=self.centralwidget)
-        self.labelMaxRow.setGeometry(QtCore.QRect(560, 30, 41, 21))
-        self.labelMaxRow.setObjectName("labelMaxRow")
-        self.spinBox = QtWidgets.QSpinBox(parent=self.centralwidget)
-        self.spinBox.setGeometry(QtCore.QRect(610, 30, 45, 27))
-        self.spinBox.setObjectName("spinBox")
+        self.maxRowLabel = QtWidgets.QLabel(parent=self.centralwidget)
+        self.maxRowLabel.setGeometry(QtCore.QRect(560, 30, 41, 21))
+        self.maxRowLabel.setObjectName("labelMaxRow")
+        self.maxRowSpinBox = QtWidgets.QSpinBox(parent=self.centralwidget)
+        self.maxRowSpinBox.setGeometry(QtCore.QRect(610, 30, 45, 27))
+        self.maxRowSpinBox.setObjectName("spinBox")
+        self.maxRowSpinBox.setMaximum(30)
+        self.maxRowSpinBox.setMinimum(10)
+        self.maxRowSpinBox.lineEdit().setReadOnly(True)
 
         # Definition Button of validation
         self.validButton = QtWidgets.QPushButton(parent=self.centralwidget)
@@ -60,7 +63,7 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "API Tool request speedrun.com"))
-        self.labelMaxRow.setText(_translate("MainWindow", "Runs"))
+        self.maxRowLabel.setText(_translate("MainWindow", "Runs"))
         self.validButton.setText(_translate("MainWindow", "Search"))
 
 class MainWindow(QMainWindow):
@@ -153,7 +156,7 @@ class MainWindow(QMainWindow):
     def formatLeaderboardWithPseudo(self, leaderboardDict):
         self.leaderBoard = [["Rank", "Player", "RealTime"]]
     
-        for i in range(1, 5):
+        for i in range(1, self.ui.maxRowSpinBox.value() + 1):
             playerId = leaderboardDict[str(i)][0]
             if "guest =" in playerId:
                 pseudo = playerId[8:]
