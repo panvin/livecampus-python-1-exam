@@ -8,11 +8,12 @@
 
 import sys
 from PyQt6 import QtCore, QtWidgets
-from PyQt6.QtGui import QColor, QIcon, QImage, QPixmap
-from PyQt6.QtWidgets import QApplication, QMainWindow, QTableWidgetItem, QHeaderView, QLabel 
+from PyQt6.QtGui import QColor
+from PyQt6.QtWidgets import QApplication, QMainWindow, QTableWidgetItem, QHeaderView
 from ModuleCedric.Module_Cédric import * 
 from moduleAnne.classesPandas import JsonToDictionnary
 from pathlib import Path
+import os
 import time
 
 
@@ -264,7 +265,9 @@ class MainWindow(QMainWindow):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    app.setStyleSheet(Path('.\stylesheet.qss').read_text())
+    rootFile = Path(__file__).parent.resolve()
+    path_stylesheet = os.path.join(rootFile, "stylesheets.qss")
+    app.setStyleSheet(path_stylesheet)
     window = MainWindow()
     window.show()
 
