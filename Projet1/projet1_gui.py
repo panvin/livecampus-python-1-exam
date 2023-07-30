@@ -155,8 +155,12 @@ class MainWindow(QMainWindow):
 
     def formatLeaderboardWithPseudo(self, leaderboardDict):
         self.leaderBoard = [["Rank", "Player", "RealTime"]]
+
+        max_range = self.ui.maxRowSpinBox.value()
+        if len(leaderboardDict) < max_range:
+            max_range = len(leaderboardDict)
     
-        for i in range(1, self.ui.maxRowSpinBox.value() + 1):
+        for i in range(1,  max_range + 1):
             playerId = leaderboardDict[str(i)][0]
             if "guest =" in playerId:
                 pseudo = playerId[8:]
